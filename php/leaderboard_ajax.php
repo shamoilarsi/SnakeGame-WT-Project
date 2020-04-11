@@ -21,7 +21,7 @@
     </thead>
     <tbody>';
 
-    $c = 0;
+    $c = 1;
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
 

@@ -237,7 +237,21 @@ function draw() {
     }
     else {
         gameOver.draw()
-        document.cookie = "max=" + score.score;
+        if(getCookie('max') < score.score){
+            document.cookie = "max=" + score.score;
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log(this.responseText)
+                }
+            }; 
+            
+            xmlhttp.open("POST", "./php/update_max_ajax.php?username=" + getCookie('username') + "&max=" + score.score, true);
+            xmlhttp.send();
+        }
+
+
+
     }
 }
 

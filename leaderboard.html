@@ -102,15 +102,15 @@
 
     window.onload = function () {
         var xmlhttp = new XMLHttpRequest();
-            xmlhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    console.log(this.responseText)
-                    document.getElementById("leaderboard_div").innerHTML = this.responseText;
-                }
-            }; 
-            
-            xmlhttp.open("POST", "./php/leaderboard_ajax.php", true);
-            xmlhttp.send();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(this.responseText)
+                document.getElementById("leaderboard_div").innerHTML = this.responseText;
+            }
+        }; 
+        
+        xmlhttp.open("POST", "./php/leaderboard_ajax.php", true);
+        xmlhttp.send();
         
     }
 
