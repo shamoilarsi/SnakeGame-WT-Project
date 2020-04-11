@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeaderBoard</title>
+    <style>
+        @font-face {
+            font-family: Retro;
+            src: url('./static/fonts/Retro.ttf');
+        }
+
+        #leaderboard_button {
+            margin-left: 250px;
+
+            color: #FFFFFF;
+            display: inline;
+            background-color: black;
+            padding-left: 15px;
+            padding-right: 15px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            border-radius: 10px;
+            font-family: Retro;
+            font-size: 20px;;
+        }
+    </style>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="./static/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="./static/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="./static/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="./static/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="./static/vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="./static/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="./static/vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="./static/css/util.css">
+    <link rel="stylesheet" type="text/css" href="./static/css/main.css">
+    <!--===============================================================================================-->
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-inverse" style="background-color: #000000;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#" style="color: white;">Snake</a>
+            </div>
+            <!-- <ul class="nav navbar-nav">
+                                <li class="active"><a href="#">Home</a></li>
+                                <li><a href="#">Page 1</a></li>
+                                <li><a href="#">Page 2</a></li>
+                            </ul> -->
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#" style="color: white; cursor: pointer;"><span class="glyphicon glyphicon-user"></span>
+                        About</a></li>
+                <li onclick="logout();"><a style="color: white;cursor: pointer"><span
+                            class="glyphicon glyphicon-log-out"></span>
+                        LogOut</a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <center>
+
+        <h3 style="font-family: Retro; font-size: 50px; margin-bottom: 50px; color: black;">Snake LeaderBoard</h3>
+        <div id="leaderboard_div" style="width: 30%;"></div>
+
+    </center>
+</body>
+<script src='./static/js/script.js'></script>
+<!--===============================================================================================-->
+<script src="./static/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+<script src="./static/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+<script src="./static/vendor/bootstrap/js/popper.js"></script>
+<script src="./static/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+<script src="./static/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+<script src="./static/vendor/daterangepicker/moment.min.js"></script>
+<script src="./static/vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+<script src="./static/vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+<script src="./static/js/main.js"></script>
+
+<script>
+
+    window.onload = function () {
+        var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log(this.responseText)
+                    document.getElementById("leaderboard_div").innerHTML = this.responseText;
+                }
+            }; 
+            
+            xmlhttp.open("POST", "./php/leaderboard_ajax.php", true);
+            xmlhttp.send();
+        
+    }
+
+    function logout() {
+        console.log("cookie deleted")
+        window.location.href = "http://localhost/snake/login.html";
+        document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/snake;";
+    }
+
+    function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+
+</script>
+
+</html>
